@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="ExpanderGridTest.MainPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:local="clr-namespace:ExpanderGridTest"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             Title="Contacts"
+             x:DataType="local:MainPageViewModel"
+             mc:Ignorable="d">
+
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+
+        </Grid.RowDefinitions>
+
+        <Expander BackgroundColor="LightCoral"
+                  IsExpanded="True">
+
+            <Expander.Triggers>
+
+                <DataTrigger Binding="{Binding CurrentContact}"
+                             TargetType="Expander"
+                             Value="{x:Null}">
+
+                    <Setter Property="IsExpanded"
+                            Value="False" />
+
+                </DataTrigger>
+
+            </Expander.Triggers>
+
+            <StackLayout Padding="20"
+                         VerticalOptions="Start">
+
+                <Label Text="{Binding CurrentContact.Name}"
+                       d:Text="Name"
+                       FontAttributes="Bold"
+                       FontSize="Large" />
+
+                <Label Text="{Binding CurrentContact.Company}"
+                       d:Text="Company"
+                       FontAttributes="Italic">
+
+                    <Label.Triggers>
+
+                        <DataTrigger Binding="{Binding CurrentContact.Company}"
+                                     TargetType="Label"
+                                     Value="{x:Null}">
+
+                            <Setter Property="IsVisible"
+                                    Value="False" />
+
+                        </DataTrigger>
+
+                    </Label.Triggers>
+
+                </Label>
+
+                <Label Text="{Binding CurrentContact.Phone}"
+                       Margin="0,20,0,0"
+                       d:Text="Phone"
+                       BackgroundColor="LightSalmon">
+
+                    <Label.Triggers>
+
+                        <DataTrigger Binding="{Binding CurrentContact.Phone}"
+                                     TargetType="Label"
+                                     Value="{x:Null}">
+
+                            <Setter Property="IsVisible"
+                                    Value="False" />
+
+                        </DataTrigger>
+
+                    </Label.Triggers>
+
+                </Label>
+
+                <Label Text="{Binding CurrentContact.Email}"
+                       d:Text="Email"
+                       BackgroundColor="LightSalmon">
+
+                    <Label.Triggers>
+
+                        <DataTrigger Binding="{Binding CurrentContact.Email}"
+                                     TargetType="Label"
+                                     Value="{x:Null}">
+
+                            <Setter Property="IsVisible"
+                                    Value="False" />
+
+                        </DataTrigger>
+
+                    </Label.Triggers>
+
+                </Label>
+
+            </StackLayout>
+
+        </Expander>
+
+        <Grid Grid.Row="1">
+
+            <StackLayout HorizontalOptions="Center"
+                         VerticalOptions="Center">
+
+                <Button Text="Contact 1"
+                        BackgroundColor="LightGreen"
+                        Command="{Binding ButtonClickedCommand}"
+                        CommandParameter="1"
+                        TextColor="White" />
+
+                <Button Text="Contact 2"
+                        BackgroundColor="LightSteelBlue"
+                        Command="{Binding ButtonClickedCommand}"
+                        CommandParameter="2"
+                        TextColor="White" />
+
+                <Button Text="Contact 3"
+                        BackgroundColor="LightPink"
+                        Command="{Binding ButtonClickedCommand}"
+                        CommandParameter="3"
+                        TextColor="White" />
+
+                <Button Text="Close Expander"
+                        BackgroundColor="Coral"
+                        Command="{Binding ButtonClickedCommand}"
+                        TextColor="White" />
+
+            </StackLayout>
+
+        </Grid>
+
+    </Grid>
+
+</ContentPage>
